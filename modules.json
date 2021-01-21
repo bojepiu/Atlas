@@ -1,0 +1,18 @@
+{
+  "modules": [
+    {
+      "key": "modulo1",
+      "name": "Modulo 1",
+      "description": "Modulo extra por default",
+      "path": "./Modules/Module1",
+      "icon": "icon icon-home"
+    },
+    {
+      "key": "modulo2",
+      "name": "Modulo 2",
+      "description": "Modulo extra por default",
+      "path": "./Modules/Module2",
+      "icon": "icon icon-cloud"
+    }
+  ]
+}

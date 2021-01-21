@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.0.1/lib/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/letterizejs/lib/letterize.min.js"></script>
+    <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"
+    integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw=="
+    crossorigin="anonymous"
+  ></script>
+    <link
+      rel="stylesheet"
+      href="./assets/css/photon.min.css"
+      media="screen"
+      charset="utf-8"
+    />
+    <script> 
+    let x=require('./Core/index.js')
+    var arrModKey=[]
+    y=x.loadModules()
+    y.forEach(element => {
+        arrModKey.push(element.key)
+    });
+    </script>
+    <link rel="stylesheet" href="./assets/css/root.css" media="screen" charset="utf-8" />
+    <script>
+      function showAndHideNav(){
+        let x=document.getElementById('NaveBar').style.display=='none'?true:false
+        x?document.getElementById('NaveBar').style.display='block':document.getElementById('NaveBar').style.display='none'
+      }
+      
+      function disableClass(){
+        arrModKey.forEach(element=>{
+            document.getElementById(element).style.display="none"
+            document.getElementById(`link${element}`).classList.remove('disabled')    
+        })
+        
+      }
+      function enableClass(e){
+        document.getElementById(e).style.display=""
+        document.getElementById(`link${e}`).classList.add('disabled')    
+      }
+    </script>
+  </head>
+  <body>
+    
+    <div class="header-arrow"></div>
+    <div class="window">
+      <header class="toolbar toolbar-header">
+        <div class="toolbar-actions" >
+          <button class="btn btn-default pull-left dropdown" style="z-index: 10;" onclick="showAndHideNav()">
+            <span class="icon icon-menu" ></span>
+            <div id="NaveBar" class="dropdown-content" style="display: none;">
+              <nav id="navgroup" class="nav-group" style="width: 100%;">   
+                
+              </nav>
+              <script>
+                
+                document.getElementById("navgroup").innerHTML=x.initPageIndex()
+                </script>
+            </div>
+          </button> 
+            <h1 class="title center_title">Atlas <span class="js-update-time"></span></h1>
+        </div>
+      </header>
+      <div class="window-content">
+            <div id="iframe" class="pane">    
+                
+            </div>
+            <script>
+                document.getElementById("iframe").innerHTML=x.initForms()
+            </script>
+      </div>
+      <footer class="toolbar toolbar-footer">
+        <div class="footer-link">
+          Made with &#9829 by Circulo de Credito 
+        </div>
+
+        <div class="toolbar-actions pull-right">
+          <div class="btn-group">
+            <button class="btn btn-default js-quit-action">
+              <span class="icon icon-cancel js-quit-action" title="Quit"></span>
+            </button>
+          </div>
+        </div>
+      </footer>
+    </div>
+   
+ 
+  </body>
+</html>
