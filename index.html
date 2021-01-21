@@ -2,34 +2,27 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <link rel="stylesheet" href="./assets/css/photon.min.css" media="screen" charset="utf-8" />
+    <link rel="stylesheet" href="./assets/css/root.css" media="screen" charset="utf-8" />
     <script src="https://cdn.jsdelivr.net/npm/animejs@3.0.1/lib/anime.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/letterizejs/lib/letterize.min.js"></script>
-    <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"
-    integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw=="
-    crossorigin="anonymous"
-  ></script>
-    <link
-      rel="stylesheet"
-      href="./assets/css/photon.min.css"
-      media="screen"
-      charset="utf-8"
-    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
+    
     <script> 
-    let x=require('./Core/index.js')
-    var arrModKey=[]
-    y=x.loadModules()
-    y.forEach(element => {
-        arrModKey.push(element.key)
-    });
+        let x=require('./Core/index.js')
+        var arrModKey=[]
+        x.loadModules().forEach(element => {
+            arrModKey.push(element.key)
+        });
+        arrModKey.push("AddModules")
+        arrModKey.push("Configuration")
     </script>
-    <link rel="stylesheet" href="./assets/css/root.css" media="screen" charset="utf-8" />
+    
     <script>
       function showAndHideNav(){
         let x=document.getElementById('NaveBar').style.display=='none'?true:false
         x?document.getElementById('NaveBar').style.display='block':document.getElementById('NaveBar').style.display='none'
-      }
-      
+      }   
       function disableClass(){
         arrModKey.forEach(element=>{
             document.getElementById(element).style.display="none"
@@ -44,7 +37,6 @@
     </script>
   </head>
   <body>
-    
     <div class="header-arrow"></div>
     <div class="window">
       <header class="toolbar toolbar-header">
@@ -66,7 +58,6 @@
       </header>
       <div class="window-content">
             <div id="iframe" class="pane">    
-                
             </div>
             <script>
                 document.getElementById("iframe").innerHTML=x.initForms()

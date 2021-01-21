@@ -2,7 +2,6 @@ const {app, BrowserWindow, ipcMain, Tray} = require('electron')
 const path = require('path')
 const ControllerModule=require('./Core/index')
 
-//Load modules
 
 let tray = undefined
 let window = undefined
@@ -27,11 +26,6 @@ const createTray = () => {
   tray.setToolTip("Sistema de respaldo y restauración autmatico")
   tray.on('click', function (event) {
     toggleWindow()
-
-    // Show devtools when command clicked
-    if (window.isVisible() && process.defaultApp && event.metaKey) {
-      window.openDevTools({mode: 'detach'})
-    }
   })
 }
 

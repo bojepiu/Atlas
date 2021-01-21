@@ -1,45 +1,46 @@
 const fs =require('fs')
 
-
-function loadModulesStore(mod){
+function loadModules(){
     /**
-     * Solicita todos los modulos existentes para su descarga
+     * Cargar los modulos que se tienen instalados en el equipo a partir del archivo modules.json
+     */
+    var f=fs.readFileSync('./modules.json')
+    j=f.toString()
+    json=JSON.parse(j)["modules"]
+    return json
+}
+
+function loadModulesStore(installedModules){
+    /**
+     * Solicita todos los modulos existentes para su descarga y retiramos los ya instalados indicados en modulos instalados
      */
     //Simulamos una llamada a una API Rest y obtenemos lo siguiente
     var json= [ {
         "key":"modulo3",
+        "name":"Modulo 3",
         "description":"Modulo extra por default",
         "install":"./server/Module3.zip", //URL
         "sha256":"sh256delmoduloadescargar"
     }, {
         "key":"modulo4",
+        "name":"Modulo 4",
         "description":"Modulo extra por default",
         "install":"./server/Module4.zip", //URL
         "sha256":"sh256delmoduloadescargar"
     },
     {
         "key":"modulo5",
+        "name":"Modulo 5",
         "description":"Modulo extra por default",
         "install":"./server/Module5.zip", //URL
         "sha256":"sh256delmoduloadescargar"
     }]
-
     var result=""
     json.forEach(element => {
-        if(!mod.includes(element["key"]))
+        if(!installedModules.includes(element["key"]))
         result+=`<li><label onclick="showModule(${element.path}/index.html)";>${element["key"]} </label></li>`
     });
     return result
-}
-
-function loadModules(){
-    /**
-     * Cargar los modulos que se tienen instalados en el equipo
-     */
-    var f=fs.readFileSync('./modules.json')
-    j=f.toString()
-    json=JSON.parse(j)["modules"]
-    return json
 }
 
 function initPageIndex(){
@@ -55,11 +56,11 @@ function initPageIndex(){
       </span>`
     })
     result+=`
-        <span id="linkConfig" class="nav-group-item" style="padding: 2px 3px 2px 0px;" onclick="disableClass();enableClass('Config'); this.classList.add('disabled')">
+        <span id="linkAddModules" class="nav-group-item" style="padding: 2px 3px 2px 0px;" onclick="disableClass();enableClass('AddModules'); this.classList.add('disabled')">
         <span class="icon icon-plus-circled" style="padding-left:3px ;"></span>
         Agregar Modulos
         </span>
-        <span class="nav-group-item" style="padding: 2px 3px 2px 0px;">
+        <span id="linkConfiguration" class="nav-group-item" style="padding: 2px 3px 2px 0px;" onclick="disableClass();enableClass('Configuration'); this.classList.add('disabled')">
         <span class="icon icon-cog" style="padding-left:3px ;"></span>
         Configuracion
         </span>`
@@ -69,6 +70,7 @@ function initPageIndex(){
 function initForms(){
     var mod=loadModules()
     result=""
+    
     mod.forEach(element=>{
         result+=`<iframe id="${element.key}"
         name="${element.name}"
@@ -82,6 +84,29 @@ function initForms(){
         style="height:100%; overflow:auto; display:none">
     </iframe>`
     })
+    result+=`
+    <iframe id="AddModules"
+        name="Agregar Modulos"
+        title="Agregar Modulos"
+        frameborder="0"
+        scrolling="no"
+        marginheight="0"
+        marginwidth="0"
+        width="100%"
+        src="./Core/AddModules/index.html"
+        style="height:100%; overflow:auto; display:none">
+    </iframe>
+    <iframe id="Configuration"
+        name="Configuracion"
+        title="Configuracion"
+        frameborder="0"
+        scrolling="no"
+        marginheight="0"
+        marginwidth="0"
+        width="100%"
+        src="./Core/Configuration/index.html"
+        style="height:98%; overflow:auto; display:none">
+    </iframe>`
     return result
 
 }

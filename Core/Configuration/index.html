@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      rel="stylesheet"
+      href="../../assets/css/root.css"
+      media="screen"
+      charset="utf-8"
+    />
+    <link rel="stylesheet" href="./config.css" media="screen" charset="utf-8" />
+    <link
+      rel="stylesheet"
+      href="../../assets/css/photon.min.css"
+      media="screen"
+      charset="utf-8"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      var locked = true;
+      var x = "";
+      function unlock() {
+        locked = !locked;
+        if (!locked)
+          document.getElementById("btnlock").className = "icon icon-lock-open";
+        else document.getElementById("btnlock").className = "icon icon-lock";
+      }
+
+      function capturaTodo(event) {
+        if (locked) {
+          x = "";
+          document.getElementById("btnlock").className = "icon icon-lock";
+          return;
+        }
+        document.getElementById("btnlock").classList.remove("key");
+        if (event.keyCode == 37) {
+          document.getElementById("btnlock").className = "icon icon-left";
+
+          x += "l";
+        } else if (event.keyCode == 38) {
+          document.getElementById("btnlock").className = "icon icon-up ";
+          x += "u";
+        } else if (event.keyCode == 40) {
+          document.getElementById("btnlock").className = "icon icon-down";
+          x += "d";
+        } else if (event.keyCode == 39) {
+          document.getElementById("btnlock").className = "icon icon-right";
+          x += "r";
+        } else if (event.keyCode == 65) {
+          document.getElementById("btnlock").className = "icon icon-heart";
+          x += "a";
+        } else if (event.keyCode == 66) {
+          document.getElementById("btnlock").className = "icon icon-heart";
+          x += "b";
+        } else {
+          x = "";
+          document.getElementById("btnlock").className = "icon icon-lock-open";
+          return;
+        }
+        if (x[x.length - 1] != "uuddlrlrab"[x.length - 1]) {
+          x = "";
+          document.getElementById("btnlock").className = "icon icon-lock-open";
+          return;
+        }
+        if (x.includes("uuddlrlrab")) {
+          document.getElementById("oculto1").style.display = "";
+          document.getElementById("puzzle1").style.display = "none";
+        }
+      }
+
+      function addKey() {
+        if (x == "") {
+          document.getElementById("btnlock").classList.add("key_error");
+        }
+        document.getElementById("btnlock").classList.add("key");
+      }
+
+      function imgClick() {
+        if (document.getElementById("imgEE").width == 70) {
+          alert("Error inesperado");
+        }
+        if (document.getElementById("imgEE").width == 60) {
+          var x = confirm("Realmente deseas eliminar Documentos?");
+          if (!x) {
+            alert("Eliminando documentos...");
+          }
+        }
+        if (document.getElementById("imgEE").width == 50) {
+          document.getElementById("puzzle2").style.display = "none";
+          document.getElementById("oculto2").style.display = "";
+        }
+        document.getElementById("imgEE").width =
+          document.getElementById("imgEE").width - 1;
+        document.getElementById("imgEE").height =
+          document.getElementById("imgEE").height - 1;
+      }
+    </script>
+  </head>
+  <body>
+    <div id="puzzle1">
+      Saca los comandos
+      <div
+        id="secret"
+        onkeydown="capturaTodo(event);"
+        onkeyup="addKey()"
+        style="position: relative; width: 50px"
+      >
+        <button class="btn btn-default" id="btn-se" onclick="unlock()">
+          <span id="btnlock" class="icon icon-lock"></span>
+        </button>
+      </div>
+    </div>
+    <div id="oculto1" style="display: none">Secreto1</div>
+    <div id="puzzle2">
+      Cuando detenerse<br />
+      <img
+        id="imgEE"
+        src="../../assets/images/icon.png"
+        width="80px"
+        height="80px"
+        onclick="imgClick()"
+      />
+    </div>
+    <div id="oculto2" style="display: none">Secreto2</div>
+  </body>
+</html>

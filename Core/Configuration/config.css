@@ -1,0 +1,22 @@
+@keyframes highlight {
+  0% {
+    background: green;
+  }
+  100% {
+    background: none;
+  }
+}
+@keyframes highlight2 {
+  0% {
+    background: red;
+  }
+  100% {
+    background: none;
+  }
+}
+.key {
+  animation: highlight 200ms;
+}
+.key_error {
+  animation: highlight2 200ms;
+}
