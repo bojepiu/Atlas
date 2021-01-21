@@ -1,0 +1,12 @@
+{
+    "modules":[{
+        "key":"modulo1",
+        "description":"Modulo extra por default",
+        "path":"./Modules/Module1"
+    },
+    {
+        "key":"modulo2",
+        "description":"Modulo extra por default",
+        "path":"./Modules/Module2"
+    }]   
+}
